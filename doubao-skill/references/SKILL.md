@@ -1,30 +1,12 @@
----
-name: doubao-image-video-skill
-version: 1.0.0           
-description: "ByteDance/Doubao (Volcengine ARK) API 进行文本生图、图片编辑和文本生视频的操作"
-author: "wenkangwei"
-tags: ["image", "video"]
----
+# Doubao Skill - 使用指南与问题整理
 
-### 目录结构
+## 📋 概述
 
-```
-doubao-skill/
-├── SKILL.md                    # 技能主文档（本文件）
-├── README.md                   # 技能说明
-├── doubao-skill.json           # 技能配置清单
-├── CHANGELOG.md                # 更新日志
-├── requirements.txt             # Python 依赖
-├── references/                 # 参考文档目录
-│   ├── README.md              # 快速开始指南
-│   ├── SKILL.md              # 详细技能文档
-│   └── INTEGRATION_GUIDE.md  # 集成指南
-└── scripts/                   # 执行脚本目录
-    ├── cli.py                # CLI 命令行工具
-    ├── doubao_demo.py         # API 客户端
-    ├── doubao_skill.py        # 核心 Skill 实现
-    └── doubao_skill_examples.py  # 使用示例
-```
+**Doubao Skill** 是一个为 OpenClaw AI 框架定制的技能扩展，允许通过 ByteDance/Doubao (Volcengine ARK) API 进行文本生图、图片编辑和文本生视频的操作。
+
+**版本**: 1.1.0
+**作者**: Doubao Skill Team
+**最后更新**: 2026-03-01
 
 ---
 
@@ -50,7 +32,7 @@ export ARK_API_KEY="your_api_key_here"
 # 或 source 配置文件
 source ~/.basic  # 如果有此文件
 
-# 4. 验证安装（进入 scripts 目录）
+# 4. 验证安装
 cd scripts
 python3 cli.py help
 ```
@@ -87,8 +69,8 @@ import asyncio
 import sys
 import os
 
-# 添加 scripts 目录到路径
-sys.path.insert(0, '/home/wwk/.openclaw/workspace/skills/doubao-skill/scripts')
+# 添加 skill 目录到路径
+sys.path.insert(0, '/home/wwk/.openclaw/workspace/skills/doubao-skill')
 
 from doubao_skill import handler
 
@@ -123,12 +105,6 @@ async def generate_image(prompt):
     cmd = [
         "python3",
         "/home/wwk/.openclaw/workspace/skills/doubao-skill/scripts/doubao_demo.py",
-
-async def generate_image(prompt):
-    """生成图片"""
-    cmd = [
-        "python3",
-        "/home/wwk/.openclaw/workspace/skills/doubao-skill/doubao_demo.py",
         "img",
         prompt
     ]
@@ -246,7 +222,6 @@ python3 cli.py edit "https://example.com/image.png" "remove logo and watermark, 
 **示例:**
 ```bash
 # 异步模式（快速返回任务ID）
-cd scripts
 python3 cli.py vid "一个人在跳舞" async
 
 # 同步模式（等待完成）
@@ -450,7 +425,7 @@ python3 cli.py edit "https://..." "remove only overlay text, preserve image"
 ### 测试 1: 基础文生图
 
 ```bash
-cd ~/.openclaw/workspace/skills/doubao-skill/scripts
+cd ~/.openclaw/workspace/skills/doubao-skill
 
 # 设置环境变量
 export ARK_API_KEY="your_api_key"
@@ -473,8 +448,6 @@ python3 cli.py img "一只可爱的小猫"
 ### 测试 2: 图片编辑（去除水印）
 
 ```bash
-cd scripts
-
 # 使用默认提示词去除水印
 python3 cli.py edit "https://example.com/image.png"
 
@@ -496,8 +469,6 @@ python3 cli.py edit "https://example.com/image.png" "remove logo and watermark, 
 ### 测试 3: 异步文生视频
 
 ```bash
-cd scripts
-
 # 启动视频生成
 python3 cli.py vid "一个人在现代城市中跳舞，夜景" async
 
@@ -527,11 +498,9 @@ python3 cli.py status "task_xxxxx"
 
 ---
 
-### 测试 4: 同步文生视频
+### 测试 3: 同步文生视频
 
 ```bash
-cd scripts
-
 # 这会等待视频生成完成（可能需要 1-3 分钟）
 python3 cli.py vid "一条龙在云彩中飞舞，奇幻场景" sync
 ```
