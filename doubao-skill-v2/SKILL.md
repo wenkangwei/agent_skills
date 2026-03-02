@@ -1,7 +1,7 @@
 ---
 name: doubao-image-video-skill-v2
 version: 1.0.0
-description: "Doubao (Volcengine ARK) API Shell 脚本实现 - 文本生图、图片编辑和文本生视频"
+description: "Doubao (Volcengine ARK) API Shell 脚本实现 - 文本生图、图片编辑和文本生视频,接口文档https://www.volcengine.com/docs/82379/1520757?lang=zh#y2hhTyHB"
 author: "wenkangwei"
 tags: ["image", "video", "shell"]
 ---
@@ -63,7 +63,11 @@ cd scripts
 
 ## 📚 使用方法
 
-### 方式 1: Shell 脚本直接调用
+### 使用建议
+1. 优先使用方法1
+2. 视频生成任务优先使用同步方法,避免浪费token到监控步骤
+
+### 方式 1(优先使用): Shell 脚本直接调用
 
 ```bash
 cd ~/.openclaw/workspace/skills/doubao-skill-v2/scripts
@@ -75,29 +79,15 @@ cd ~/.openclaw/workspace/skills/doubao-skill-v2/scripts
 ./doubao.sh edit "https://..." "remove watermark"
 
 # 生成视频（异步）
-./doubao.sh vid "一个人在跳舞" async
+./doubao.sh vid "一个人在跳舞" async ''
 
 # 生成视频（同步 - 等待完成）
-./doubao.sh vid "一个人在跳舞" sync
+./doubao.sh vid "一个人在跳舞" sync ''
 
 # 检查任务状态
 ./doubao.sh status "task_xxxxx"
 ```
 
-### 方式 2: 通过 Skill 包装调用
-
-```bash
-cd ~/.openclaw/workspace/skills/doubao-skill-v2/scripts
-
-# 使用 Skill 包装
-./doubao_skill.sh img "一只可爱的小猫"
-
-# 编辑图片
-./doubao_skill.sh edit "https://..." "remove watermark"
-
-# 生成视频
-./doubao_skill.sh vid "一个人在跳舞" sync
-```
 
 ---
 
@@ -191,7 +181,7 @@ cd ~/.openclaw/workspace/skills/doubao-skill-v2/scripts
 ./doubao.sh vid "一个人在跳舞" async
 
 # 同步模式（等待完成）
-./doubao.sh vid "一个人在跳舞" sync
+./doubao.sh vid "一个人在跳舞" sync ''
 ```
 
 ---
@@ -434,7 +424,7 @@ cd scripts
 cd scripts
 
 # 这会等待视频生成完成（可能需要 1-3 分钟）
-./doubao.sh vid "一条龙在云彩中飞舞，奇幻场景" sync
+./doubao.sh vid "一条龙在云彩中飞舞，奇幻场景" sync ''
 ```
 
 **预期结果:**

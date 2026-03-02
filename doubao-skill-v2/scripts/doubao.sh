@@ -103,6 +103,7 @@ EOF
         -H "Authorization: Bearer ${ARK_API_KEY}" \
         -d "$payload")
     
+    echo "Respose: $response"
     # 检查响应
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ API 调用失败${NC}"
@@ -153,6 +154,8 @@ EOF
         -H "Authorization: Bearer ${ARK_API_KEY}" \
         -d "$payload")
     
+    echo "Respose: $response"
+
     # 检查响应
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ API 调用失败${NC}"
@@ -180,7 +183,7 @@ EOF
 generate_video() {
     local prompt="$1"
     local image_url="${2:-}"
-    local sync_mode="${3:-async}"
+    local sync_mode="${3:-sync}"
     
     echo -e "${YELLOW}🎬 生成视频...${NC}"
     echo "提示词: ${prompt}"
@@ -194,11 +197,17 @@ generate_video() {
         # 带参考图
         payload=$(cat <<EOF
 {
-  "model": "doubao-seedance-1-0-pro-250528",
+  "model": "doubao-seedance-1-0-pro-fast-251015",
   "content": [
     {"type": "text", "text": "${prompt}"},
     {"type": "image_url", "image_url": {"url": "${image_url}"}}
-  ]
+  ],
+  "resolution": "720p",
+  "ratio":"16:9",
+  "duration": 5,
+  "seed": 11,
+  "camera_fixed": false,
+  "watermark": true
 }
 EOF
 )
@@ -206,10 +215,16 @@ EOF
         # 不带参考图
         payload=$(cat <<EOF
 {
-  "model": "doubao-seedance-1-0-pro-250528",
+  "model": "doubao-seedance-1-0-pro-fast-251015",
   "content": [
     {"type": "text", "text": "${prompt}"}
-  ]
+  ],
+  "resolution": "720p",
+  "ratio":"16:9",
+  "duration": 5,
+  "seed": 11,
+  "camera_fixed": false,
+  "watermark": true
 }
 EOF
 )
@@ -229,6 +244,7 @@ EOF
     fi
     
     # 解析响应
+    echo "Respose: $response"
     local task_id=$(echo "$response" | jq -r '.id' 2>/dev/null)
     
     if [ -z "$task_id" ]; then
@@ -392,7 +408,7 @@ HELP
             
             local prompt="$1"
             local image_url="${2:-}"
-            local sync_mode="async"
+            local sync_mode="sync"
             
             # 判断第二个参数是图片 URL 还是模式
             if [ -n "$image_url" ]; then
