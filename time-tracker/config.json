@@ -1,0 +1,7 @@
+{
+  "defaultRate": 100,
+  "currency": "CNY",
+  "roundTo": 15,
+  "autoStop": false,
+  "notification": true
+}
