@@ -1,0 +1,7 @@
+{
+  "defaultCurrency": "CNY",
+  "defaultTaxRate": 0,
+  "defaultComplexity": "normal",
+  "quoteValidityDays": 7,
+  "historyMaxSize": 100
+}

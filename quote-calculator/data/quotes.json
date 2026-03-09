@@ -1,0 +1,39 @@
+[
+  {
+    "id": "20260309-498",
+    "mode": "project",
+    "subtotal": 6200,
+    "taxRate": 0,
+    "taxAmount": 0,
+    "total": 6200,
+    "currency": "CNY",
+    "details": {
+      "base": 5000,
+      "features": [
+        1000,
+        500
+      ],
+      "featuresTotal": 1500,
+      "discount": 300
+    },
+    "createdAt": "2026-03-09T04:07:08.229Z",
+    "validDays": 7
+  },
+  {
+    "id": "20260309-088",
+    "mode": "per-item",
+    "subtotal": 1425,
+    "taxRate": 0,
+    "taxAmount": 0,
+    "total": 1425,
+    "currency": "CNY",
+    "details": {
+      "price": 50,
+      "quantity": 30,
+      "discountFactor": 0.95,
+      "discountAmount": 75
+    },
+    "createdAt": "2026-03-09T04:07:05.730Z",
+    "validDays": 7
+  }
+]
